@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use App\Repositories\Interfaces\UserRepository;
+use App\Resources\User as UserResource;
 
 class UserController extends BaseController
 {
@@ -31,7 +32,7 @@ class UserController extends BaseController
     {
         return $this->withErrorHandling(function ($request) {
             $data = $this->user->all();
-            return $this->responseWithData($data);
+            return $this->responseWithData(UserResource::collection($data));
         }, $request);
     }
 }
