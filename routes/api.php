@@ -13,9 +13,14 @@ use Illuminate\Http\Request;
 |
 */
 
+Route::post('/login', 'UserController@login')->name('login');
+
 Route::Group([
     'prefix' => 'user',
     'as' => 'user.'
 ], function () {
-    Route::get('', 'UserController@index')->name('get');
+    
+    Route::Group(['middleware' => 'auth:api'], function() {
+        Route::post('', 'UserController@index')->name('get');
+    });
 });
