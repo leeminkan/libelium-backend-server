@@ -156,7 +156,39 @@ return [
 
     'name_required' => [
         'code' => 1001,
-        'message' => 'The app name is required.',
+        'message' => 'The name is required.',
+    ],
+
+    'email_required' => [
+        'code' => 1011,
+        'message' => 'The email is required.',
+    ],
+
+    'email_string' => [
+        'code' => 1012,
+        'message' => 'The email is required.',
+    ],
+
+    'email_invalid' => [
+        'code' => 1013,
+        'message' => 'The email is invalid.',
+    ],
+
+    'password_required' => [
+        'code' => 1021,
+        'message' => 'The password is required.',
+    ],
+
+    'password_string' => [
+        'code' => 1022,
+        'message' => 'The password must be string.',
+    ],
+
+    # Authentication - 900x
+    
+    'unauthorized' => [
+        'code' => 9001,
+        'message' => 'Unauthorized.',
     ],
 
 ];
