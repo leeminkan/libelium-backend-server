@@ -15,8 +15,11 @@ class CreateDataCollectionsTable extends Migration
     {
         Schema::create('data_collections', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('waspmote_id')->unique();
-            $table->bigIncrements('transaction_id');
+            $table->string('waspmote_id');
+            $table->unsignedBigInteger('transaction_id');
+            $table->foreign('transaction_id')
+                ->references('id')->on('transactions')
+                ->onDelete('cascade');
             $table->string('type');
             $table->string('value');
             $table->timestamps();

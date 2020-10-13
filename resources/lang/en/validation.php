@@ -152,7 +152,7 @@ return [
     |------------------------------------------------------------------------
     */
     
-    # Users - 100x-11xx
+    # Users - 100x
 
     'name_required' => [
         'code' => 1001,
@@ -182,6 +182,13 @@ return [
     'password_string' => [
         'code' => 1022,
         'message' => 'The password must be string.',
+    ],
+
+    # Device - 120x
+
+    'type_required' => [
+        'code' => 1021,
+        'message' => 'The type is required.',
     ],
 
     # Authentication - 900x

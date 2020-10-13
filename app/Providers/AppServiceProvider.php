@@ -11,6 +11,8 @@ class AppServiceProvider extends ServiceProvider
     protected $repositories = [
         "App\Repositories\Interfaces\BaseRepository" => "App\Repositories\BaseRepository",
         "App\Repositories\Interfaces\UserRepository" => "App\Repositories\UserRepository",
+        "App\Repositories\Interfaces\DeviceRepository" => "App\Repositories\DeviceRepository",
+        "App\Repositories\Interfaces\TransactionRepository" => "App\Repositories\TransactionRepository",
     ];
     /**
      * Register any application services.

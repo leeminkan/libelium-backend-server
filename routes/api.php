@@ -24,3 +24,24 @@ Route::Group([
         Route::post('', 'UserController@index')->name('get');
     });
 });
+
+Route::Group([
+    'prefix' => 'devices',
+    'as' => 'devices.'
+], function () {
+    
+    Route::Group(['middleware' => 'auth:api'], function() {
+        Route::get('', 'DeviceController@index')->name('get');
+        Route::get('{id}/data', 'DeviceController@getData')->name('get-data');
+    });
+});
+
+Route::Group([
+    'prefix' => 'transactions',
+    'as' => 'transactions.'
+], function () {
+    
+    Route::Group(['middleware' => 'auth:api'], function() {
+        Route::get('', 'TransactionController@index')->name('get');
+    });
+});
