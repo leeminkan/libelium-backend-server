@@ -11,4 +11,22 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
     {
         return User::class;
     }
+
+    public function searchFields(): array
+    {
+        return [
+            'id',
+            'created_at',
+            'updated_at'
+        ];
+    }
+
+    public function sortFields(): array
+    {
+        return [
+            'id',
+            'created_at',
+            'updated_at'
+        ];
+    }
 }

@@ -11,4 +11,22 @@ class DeviceRepository extends BaseRepository implements DeviceRepositoryInterfa
     {
         return Device::class;
     }
+
+    public function searchFields(): array
+    {
+        return [
+            'id',
+            'created_at',
+            'updated_at'
+        ];
+    }
+
+    public function sortFields(): array
+    {
+        return [
+            'id',
+            'created_at',
+            'updated_at'
+        ];
+    }
 }

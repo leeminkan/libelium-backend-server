@@ -61,9 +61,16 @@ class DeviceController extends BaseController
 
             $type = $request->get('type', '');
             $device = $this->device->findOrFail($id);
-            $data = $device->data_collections()->where('type', $type)->get();
+            $query = $device->data_collections()->where('type', $type);
+
+            if (is_null($request->get('pagination')) || $request->get('pagination')) {
+                $data = $query->paginate((int)$request->get('per_page', 10));
+            } else {
+                $data = $query->get();
+            }
+
             
-            return $this->responseWithData(DataCollection::collection($data));
+            return $this->responseWithData($data);
         }, $request);
     }
 }

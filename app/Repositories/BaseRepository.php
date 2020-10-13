@@ -11,9 +11,12 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Container\Container as App;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use App\Repositories\Interfaces\BaseRepository as BaseRepositoryInterface;
+use App\Traits\FilterSearchQuery;
+use Illuminate\Http\Request;
 
 abstract class BaseRepository implements BaseRepositoryInterface
 {
+    use FilterSearchQuery;
 
     /**
      * @var App
@@ -35,6 +38,7 @@ abstract class BaseRepository implements BaseRepositoryInterface
     {
         $this->app = $app;
         $this->makeModel();
+        $this->makeSearchField();
     }
 
 
@@ -147,5 +151,58 @@ abstract class BaseRepository implements BaseRepositoryInterface
                 throw (new ValidationException)->setValidator($validator);
             }
         }
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function allOrPaginate($query, Request $request)
+    {
+        if (is_null($request->get('pagination')) || $request->get('pagination')) {
+            return $query->paginate((int)$request->get('per_page', 10));
+        }
+        return $query->get();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function serverFilteringFor(Request $request)
+    {
+        $query = $this->allWithBuilder();
+        $this->sortQuery($query, $request->get('order_by', null), $request->get('order', null));
+
+        return $this->allOrPaginate($query, $request);
+    }
+
+    /**
+     * @return array
+     */
+    public function searchFields(): array
+    {
+        return [];
+    }
+
+    /**
+     * @return array
+     */
+    public function searchExactlyFields(): array
+    {
+        return [];
+    }
+
+    /**
+     * @return array
+     */
+    public function sortFields(): array
+    {
+        return [];
+    }
+    
+    protected function makeSearchField()
+    {
+        $this->search_fields = $this->searchFields();
+        $this->search_exactly_fields = $this->searchExactlyFields();
+        $this->sort_fields = $this->sortFields();
     }
 }

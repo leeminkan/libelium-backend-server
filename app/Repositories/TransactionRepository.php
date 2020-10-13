@@ -11,4 +11,22 @@ class TransactionRepository extends BaseRepository implements TransactionReposit
     {
         return Transaction::class;
     }
+
+    public function searchFields(): array
+    {
+        return [
+            'id',
+            'created_at',
+            'updated_at'
+        ];
+    }
+
+    public function sortFields(): array
+    {
+        return [
+            'id',
+            'created_at',
+            'updated_at'
+        ];
+    }
 }

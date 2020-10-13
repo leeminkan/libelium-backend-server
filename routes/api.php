@@ -45,3 +45,14 @@ Route::Group([
         Route::get('', 'TransactionController@index')->name('get');
     });
 });
+
+Route::Group([
+    'prefix' => 'data-collections',
+    'as' => 'data-collections.'
+], function () {
+    
+    Route::Group(['middleware' => 'auth:api'], function() {
+        Route::get('', 'DataCollectionController@index')->name('get');
+        Route::get('get-by-waspmote-id/{id}', 'DataCollectionController@getByWaspmoteId')->name('get-by-waspmote-id');
+    });
+});

@@ -4,6 +4,7 @@ namespace App\Repositories\Interfaces;
 
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\Request;
 
 interface BaseRepository
 {
@@ -53,4 +54,17 @@ interface BaseRepository
      * @return bool
      */
     public function destroy($model);
+
+    /**
+     * @param $query
+     * @param Request $request
+     * @return mixed
+     */
+    public function allOrPaginate($query, Request $request);
+
+    /**
+     * @param Request $request
+     * @return mixed
+     */
+    public function serverFilteringFor(Request $request);
 }
