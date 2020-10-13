@@ -14,6 +14,7 @@ class CreateSettingsTable extends Migration
     public function up()
     {
         Schema::create('settings', function (Blueprint $table) {
+            $table->bigIncrements('id');
             $table->string('window_size');
             $table->string('saving_level');
             $table->string('time_base');

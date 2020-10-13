@@ -56,3 +56,14 @@ Route::Group([
         Route::get('get-by-waspmote-id/{id}', 'DataCollectionController@getByWaspmoteId')->name('get-by-waspmote-id');
     });
 });
+
+Route::Group([
+    'prefix' => 'settings',
+    'as' => 'settings.'
+], function () {
+    
+    Route::Group(['middleware' => 'auth:api'], function() {
+        Route::get('', 'SettingController@index')->name('get');
+        Route::put('', 'SettingController@update')->name('update');
+    });
+});
