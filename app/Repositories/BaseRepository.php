@@ -170,6 +170,9 @@ abstract class BaseRepository implements BaseRepositoryInterface
     public function serverFilteringFor(Request $request)
     {
         $query = $this->allWithBuilder();
+        
+        $this->filterQuery($query, $request->get('filters', []));
+        $this->searchQuery($query, $request->get('search', null));
         $this->sortQuery($query, $request->get('order_by', null), $request->get('order', null));
 
         return $this->allOrPaginate($query, $request);
