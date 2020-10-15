@@ -13,4 +13,17 @@ class DataCollection extends Model
         'type',
         'value'
     ];
+
+    public $filterRelationAttributes = [
+        'name' => 'device.name',
+    ];
+
+    public $sortRelationAttributes = [
+        'name' => 'device.name',
+    ];
+
+    public function device()
+    {
+        return $this->belongsTo(Device::class, 'waspmote_id', 'waspmote_id');
+    }
 }

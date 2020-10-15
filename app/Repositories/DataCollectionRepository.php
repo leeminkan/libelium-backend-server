@@ -26,6 +26,7 @@ class DataCollectionRepository extends BaseRepository implements DataCollectionR
     {
         return [
             'id',
+            'name',
             'created_at',
             'updated_at'
         ];

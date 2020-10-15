@@ -11,6 +11,7 @@ class DataCollection extends Resource
         return [
             'id' => $this->id,
             'waspmote_id' => $this->waspmote_id,
+            'name' => $this->device->name,
             'transaction_id' => $this->transaction_id,
             'type' => $this->type,
             'value' => $this->value,
