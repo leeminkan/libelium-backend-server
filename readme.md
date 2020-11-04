@@ -6,3 +6,10 @@ php artisan key:generate
 php artisan passport:install
 - migrate
 php artisan migrate --seed
+
+## Dashboard
+```bash
+cd dashboard
+npm install
+npm run build:prod
+```
