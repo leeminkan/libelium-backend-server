@@ -2,6 +2,7 @@
 /dashboard
 /public/hot
 /public/storage
+/storage/api-docs
 /storage/*.key
 /vendor
 .env
