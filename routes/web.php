@@ -11,6 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('{all}', function () {
+    return File::get(public_path() . '\dashboard\index.html');
+})->where('all', '^(?!api).*$');
