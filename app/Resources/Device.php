@@ -4,6 +4,7 @@ namespace App\Resources;
 
 use Illuminate\Http\Resources\Json\Resource;
 use App\Enums\DataTypeEnum;
+use App\Resources\Sensor;
 
 class Device extends Resource
 {
@@ -17,6 +18,7 @@ class Device extends Resource
             'waspmote_id' => $this->waspmote_id,
             'name' => $this->name,
             'battery' => $battery ? $battery->value : null,
+            'sensors' => Sensor::collection($this->sensors()->get()),
             'created_at' => $this->created_at
         ];
     }

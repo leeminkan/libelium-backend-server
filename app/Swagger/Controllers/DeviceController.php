@@ -51,16 +51,21 @@ class DeviceController
      *       {"APIKeyHeader": {}}
      *   },
      *   @SWG\Parameter(
-     *       name="waspmote_id",
-     *       in="formData",
+     *       name="body",
+     *       in="body",
      *       required=true,
-     *       type="string"
-     *   ),
-     *   @SWG\Parameter(
-     *       name="name",
-     *       in="formData",
-     *       required=true,
-     *       type="string"
+     *       @SWG\Schema(
+     *          required={"waspmote_id", "name"},
+     *          @SWG\Property(property="waspmote_id",  type="string"),
+     *          @SWG\Property(property="name",  type="string"),
+     *          @SWG\Property(
+     *              property="sensors",  
+     *              type="array",
+     *              @SWG\Items(
+     *                  type="number"
+     *                 )
+     *          )
+     *      )
      *   ),
      *   @SWG\Response(response=200, description="Successful operation"),
      *   @SWG\Response(response=422, description="Unprocessable Entity"),
@@ -81,16 +86,21 @@ class DeviceController
      *       type="number"
      *   ),
      *   @SWG\Parameter(
-     *       name="waspmote_id",
-     *       in="formData",
+     *       name="body",
+     *       in="body",
      *       required=true,
-     *       type="string"
-     *   ),
-     *   @SWG\Parameter(
-     *       name="name",
-     *       in="formData",
-     *       required=true,
-     *       type="string"
+     *       @SWG\Schema(
+     *          required={"waspmote_id", "name"},
+     *          @SWG\Property(property="waspmote_id",  type="string"),
+     *          @SWG\Property(property="name",  type="string"),
+     *          @SWG\Property(
+     *              property="sensors",  
+     *              type="array",
+     *              @SWG\Items(
+     *                  type="number"
+     *                 )
+     *          )
+     *      )
      *   ),
      *   @SWG\Response(response=200, description="Successful operation"),
      *   @SWG\Response(response=422, description="Unprocessable Entity"),
