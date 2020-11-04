@@ -41,6 +41,42 @@ class DeviceController extends BaseController
         }, $request);
     }
 
+    public function store(Request $request)
+    {
+        return $this->withErrorHandling(function ($request) {
+
+            $data = $this->device->create($request->all());
+            
+            return $this->responseWithData(new DeviceResource($data));
+        }, $request);
+    }
+
+    public function find($id)
+    {
+        return $this->withErrorHandling(function () use ($id) {
+            $data = $this->device->findOrFail($id);
+            return $this->responseWithData(new DeviceResource($data));
+        });
+    }
+
+    public function update(Request $request, $id)
+    {
+        return $this->withErrorHandling(function ($request) use ($id) {
+            $device = $this->device->findOrFail($id);
+            $this->device->update($device, $request->all());
+            return $this->responseWithData(new DeviceResource($device->fresh()));
+        }, $request);
+    }
+
+    public function destroy(Request $request, $id)
+    {
+        return $this->withErrorHandling(function ($request) use ($id) {
+            $device = $this->device->findOrFail($id);
+            $this->device->destroy($device);
+            return $this->messageResponse("Successfully!");
+        }, $request);
+    }
+
     public function getData(Request $request, $id)
     {
         return $this->withErrorHandling(function ($request) use ($id) {

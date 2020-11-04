@@ -33,17 +33,5 @@ class AuthenticationController
      *   @SWG\Response(response=500, description="Internal server error")
      * )
      * 
-     * 
-     * @SWG\Get(
-     *   path="/devices",
-     *   summary="Devices",
-     *   tags={"Devices"},
-     *   security={
-     *       {"APIKeyHeader": {}}
-     *   },
-     *   @SWG\Response(response=200, description="Successful operation"),
-     *   @SWG\Response(response=422, description="Unprocessable Entity"),
-     *   @SWG\Response(response=500, description="Internal server error")
-     * )
      */
 }
