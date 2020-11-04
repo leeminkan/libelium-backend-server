@@ -21,4 +21,9 @@ class Device extends Model
     {
         return $this->hasMany(DataCollection::class, 'waspmote_id', 'waspmote_id');
     }
+
+    public function sensors()
+    {
+        return $this->belongsToMany(Sensor::class, 'device_sensors');
+    }
 }

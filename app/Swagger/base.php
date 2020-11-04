@@ -19,6 +19,10 @@
  *     @SWG\Tag(
  *          name="Devices",
  *          description="Devices description"
+ *      ),
+ *     @SWG\Tag(
+ *          name="Sensors",
+ *          description="Sensors description"
  *      )
  *  )
  */

@@ -41,6 +41,20 @@ Route::Group([
 });
 
 Route::Group([
+    'prefix' => 'sensors',
+    'as' => 'sensors.'
+], function () {
+    
+    Route::Group(['middleware' => 'auth:api'], function() {
+        Route::get('', 'SensorController@index')->name('get');
+        Route::post('', 'SensorController@store')->name('store');
+        Route::get('{id}', 'SensorController@find')->name('find');
+        Route::put('{id}', 'SensorController@update')->name('update');
+        Route::delete('{id}', 'SensorController@destroy')->name('destroy');
+    });
+});
+
+Route::Group([
     'prefix' => 'transactions',
     'as' => 'transactions.'
 ], function () {
