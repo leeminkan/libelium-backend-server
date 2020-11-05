@@ -25,10 +25,13 @@ class UsersTableSeeder extends Seeder
     {
 
         try {
+            
+            $this->user->allWithBuilder()->delete();
+
             $credentials = [
                 'name' => 'admin',
-                'email' => 'admin@localhost',
-                'password' => bcrypt('admin'),
+                'email' => 'admin@gmail.com',
+                'password' => bcrypt('Bss123'),
             ];
 
             $this->user->create($credentials);
