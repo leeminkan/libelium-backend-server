@@ -34,10 +34,12 @@ class DeviceController extends BaseController
     public function index(Request $request)
     {
         return $this->withErrorHandling(function ($request) {
-
-            $data = $this->device->all();
-            
-            return $this->responseWithData(DeviceResource::collection($data));
+            return DeviceResource::collection(
+                $this->device->serverFilteringFor($request)
+            )->additional([
+                'error' => false,
+                'errors' => null
+            ]);
         }, $request);
     }
 
