@@ -3,6 +3,7 @@
 /public/hot
 /public/storage
 /public/dashboard
+/public/uploads
 /storage/api-docs
 /storage/*.key
 /vendor

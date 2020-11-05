@@ -9,7 +9,8 @@ class Device extends Model
     protected $table = 'devices';
     protected $fillable = [
         'waspmote_id',
-        'name'
+        'name',
+        'image'
     ];
     
     public function transactions()

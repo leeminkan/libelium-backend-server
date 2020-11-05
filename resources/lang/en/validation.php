@@ -191,6 +191,11 @@ return [
         'message' => 'The type is required.',
     ],
 
+    'device_image_invalid' => [
+        'code' => 1022,
+        'message' => 'The image is invalid.',
+    ],
+
     # Authentication - 900x
     
     'unauthorized' => [

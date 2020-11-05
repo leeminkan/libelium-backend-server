@@ -9,9 +9,13 @@ use App\Resources\Device as DeviceResource;
 use App\Resources\DataCollection;
 use Illuminate\Support\Facades\Validator;
 use App\Exceptions\ValidationException;
+use App\Traits\UploadTrait;
+use Illuminate\Support\Str;
 
 class DeviceController extends BaseController
 {
+    use UploadTrait;
+
     /**
      * @var DeviceRepository
      */
@@ -47,7 +51,40 @@ class DeviceController extends BaseController
     {
         return $this->withErrorHandling(function ($request) {
 
-            $data = $this->device->create($request->all());
+            $rules = [
+                'image' => 'image|mimes:jpeg,png,jpg|max:2048',
+            ];
+
+            $messages = [
+                'image.image' => 'device_image_invalid',
+                'image.mimes' => 'device_image_invalid',
+                'image.max' => 'device_image_invalid',
+            ];
+
+            $validator = Validator::make($request->all(), $rules, $messages);
+
+            if ($validator->fails()) {
+                throw (new ValidationException)->setValidator($validator);
+            }
+
+            $input = $request->all();
+
+            if ($request->has('image')) {
+                // Get image file
+                $image = $request->file('image');
+                // Make a image name based on user name and current timestamp
+                $name = Str::slug($request->input('name')).'_'.time();
+                // Define folder path
+                $folder = '/uploads/images/';
+                // Make a file path where image will be stored [ folder path + file name + file extension]
+                $filePath = $folder . $name. '.' . $image->getClientOriginalExtension();
+                // Upload image
+                $this->uploadOne($image, $folder, 'local', $name);
+
+                $input['image'] = $filePath;
+            }
+
+            $data = $this->device->create($input);
             
             return $this->responseWithData(new DeviceResource($data));
         }, $request);
@@ -64,8 +101,42 @@ class DeviceController extends BaseController
     public function update(Request $request, $id)
     {
         return $this->withErrorHandling(function ($request) use ($id) {
+
+            $rules = [
+                'image' => 'image|mimes:jpeg,png,jpg|max:2048',
+            ];
+
+            $messages = [
+                'image.image' => 'device_image_invalid',
+                'image.mimes' => 'device_image_invalid',
+                'image.max' => 'device_image_invalid',
+            ];
+
+            $validator = Validator::make($request->all(), $rules, $messages);
+
+            if ($validator->fails()) {
+                throw (new ValidationException)->setValidator($validator);
+            }
+
+            $input = $request->all();
+
+            if ($request->has('image')) {
+                // Get image file
+                $image = $request->file('image');
+                // Make a image name based on user name and current timestamp
+                $name = Str::slug($request->input('name')).'_'.time();
+                // Define folder path
+                $folder = '/uploads/images/';
+                // Make a file path where image will be stored [ folder path + file name + file extension]
+                $filePath = $folder . $name. '.' . $image->getClientOriginalExtension();
+                // Upload image
+                $this->uploadOne($image, $folder, 'local', $name);
+
+                $input['image'] = $filePath;
+            }
+
             $device = $this->device->findOrFail($id);
-            $this->device->update($device, $request->all());
+            $this->device->update($device, $input);
             return $this->responseWithData(new DeviceResource($device->fresh()));
         }, $request);
     }
