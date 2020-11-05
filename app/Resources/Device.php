@@ -17,6 +17,7 @@ class Device extends Resource
             'id' => $this->id,
             'waspmote_id' => $this->waspmote_id,
             'name' => $this->name,
+            'image' => $this->image,
             'battery' => $battery ? $battery->value : null,
             'sensors' => Sensor::collection($this->sensors()->get()),
             'created_at' => $this->created_at
