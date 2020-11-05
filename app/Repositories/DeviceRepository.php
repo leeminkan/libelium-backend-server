@@ -40,6 +40,8 @@ class DeviceRepository extends BaseRepository implements DeviceRepositoryInterfa
         if (isset($data['sensors'])) {
             $device->sensors()->sync($data['sensors']);
         }
+
+        return $device;
     }
 
     public function update($model, $data)
@@ -53,5 +55,7 @@ class DeviceRepository extends BaseRepository implements DeviceRepositoryInterfa
         if (isset($data['sensors'])) {
             $device->sensors()->sync($data['sensors']);
         }
+
+        return $device;
     }
 }
