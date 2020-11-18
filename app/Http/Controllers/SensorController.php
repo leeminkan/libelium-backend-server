@@ -34,9 +34,12 @@ class SensorController extends BaseController
     {
         return $this->withErrorHandling(function ($request) {
 
-            $data = $this->sensor->all();
-            
-            return $this->responseWithData(SensorResource::collection($data));
+            return SensorResource::collection(
+                $this->sensor->serverFilteringFor($request)
+            )->additional([
+                'error' => false,
+                'errors' => null
+            ]);
         }, $request);
     }
 

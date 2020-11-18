@@ -25,6 +25,7 @@ class SensorRepository extends BaseRepository implements SensorRepositoryInterfa
     {
         return [
             'id',
+            'name',
             'created_at',
             'updated_at'
         ];
