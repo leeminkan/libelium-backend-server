@@ -34,7 +34,7 @@ Route::Group([
         Route::get('', 'DeviceController@index')->name('get');
         Route::post('', 'DeviceController@store')->name('store');
         Route::get('{id}', 'DeviceController@find')->name('find');
-        Route::put('{id}', 'DeviceController@update')->name('update');
+        Route::post('{id}', 'DeviceController@update')->name('update');
         Route::delete('{id}', 'DeviceController@destroy')->name('destroy');
         Route::get('{id}/data', 'DeviceController@getData')->name('get-data');
     });

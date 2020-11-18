@@ -52,7 +52,7 @@ class DeviceController extends BaseController
         return $this->withErrorHandling(function ($request) {
 
             $rules = [
-                'image' => 'image|mimes:jpeg,png,jpg|max:2048',
+                'image' => 'image|mimes:jpeg,png,jpg|max:5120',
             ];
 
             $messages = [
@@ -103,7 +103,7 @@ class DeviceController extends BaseController
         return $this->withErrorHandling(function ($request) use ($id) {
 
             $rules = [
-                'image' => 'image|mimes:jpeg,png,jpg|max:2048',
+                'image' => 'image|mimes:jpeg,png,jpg|max:5120',
             ];
 
             $messages = [
