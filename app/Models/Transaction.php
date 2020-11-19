@@ -11,6 +11,17 @@ class Transaction extends Model
         'waspmote_id',
         'type'
     ];
+
+    public function delete()
+    {
+        $isSoftDeleted = array_key_exists('Illuminate\Database\Eloquent\SoftDeletes', class_uses($this));
+
+        if ($this->exists && !$isSoftDeleted) {
+            $this->data_collections()->delete();
+        }
+
+        return parent::delete();
+    }
     
     public function data_collections()
     {

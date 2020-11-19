@@ -12,6 +12,18 @@ class Device extends Model
         'name',
         'image'
     ];
+
+    public function delete()
+    {
+        $isSoftDeleted = array_key_exists('Illuminate\Database\Eloquent\SoftDeletes', class_uses($this));
+
+        if ($this->exists && !$isSoftDeleted) {
+            $this->sensors()->sync([]);
+            $this->transactions()->delete();
+        }
+
+        return parent::delete();
+    }
     
     public function transactions()
     {
