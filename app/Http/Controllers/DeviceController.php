@@ -69,6 +69,10 @@ class DeviceController extends BaseController
 
             $input = $request->all();
 
+            if ($input['sensors'] && is_string($input['sensors'])) {
+                $input['sensors'] = json_decode($input['sensors']);
+            }
+
             if ($request->has('image')) {
                 // Get image file
                 $image = $request->file('image');
@@ -119,6 +123,10 @@ class DeviceController extends BaseController
             }
 
             $input = $request->all();
+
+            if ($input['sensors'] && is_string($input['sensors'])) {
+                $input['sensors'] = json_decode($input['sensors']);
+            }
 
             if ($request->has('image')) {
                 // Get image file
