@@ -10,7 +10,8 @@ class Device extends Model
     protected $fillable = [
         'waspmote_id',
         'name',
-        'image'
+        'image',
+        'is_displayed'
     ];
 
     public function delete()

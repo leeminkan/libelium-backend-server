@@ -31,6 +31,7 @@ Route::Group([
 ], function () {
     
     Route::Group(['middleware' => 'auth:api'], function() {
+        Route::get('/display', 'DeviceController@getDisplayedDevices')->name('display');
         Route::get('', 'DeviceController@index')->name('get');
         Route::post('', 'DeviceController@store')->name('store');
         Route::get('{id}', 'DeviceController@find')->name('find');

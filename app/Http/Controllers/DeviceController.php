@@ -69,7 +69,7 @@ class DeviceController extends BaseController
 
             $input = $request->all();
 
-            if ($input['sensors'] && is_string($input['sensors'])) {
+            if (isset($input['sensors']) && is_string($input['sensors'])) {
                 $input['sensors'] = json_decode($input['sensors']);
             }
 
@@ -124,7 +124,7 @@ class DeviceController extends BaseController
 
             $input = $request->all();
 
-            if ($input['sensors'] && is_string($input['sensors'])) {
+            if (isset($input['sensors']) && is_string($input['sensors'])) {
                 $input['sensors'] = json_decode($input['sensors']);
             }
 
@@ -188,6 +188,16 @@ class DeviceController extends BaseController
 
             
             return $this->responseWithData($data);
+        }, $request);
+    }
+
+    public function getDisplayedDevices(Request $request)
+    {
+        return $this->withErrorHandling(function ($request) {
+            $devices = $this->device->allWithBuilder()->where('is_displayed', true)->get();
+            return $this->responseWithData(DeviceResource::collection(
+                $devices
+            ));
         }, $request);
     }
 }
