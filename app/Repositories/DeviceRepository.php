@@ -26,6 +26,9 @@ class DeviceRepository extends BaseRepository implements DeviceRepositoryInterfa
     {
         return [
             'id',
+            'waspmote_id',
+            'name',
+            'is_displayed',
             'created_at',
             'updated_at'
         ];

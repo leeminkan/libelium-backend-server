@@ -26,7 +26,8 @@ class DataCollectionRepository extends BaseRepository implements DataCollectionR
     {
         return [
             'id',
-            'name',
+            'device_name',
+            'sensor_name',
             'created_at',
             'updated_at'
         ];

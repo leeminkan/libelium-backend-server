@@ -3,7 +3,6 @@
 namespace App\Resources;
 
 use Illuminate\Http\Resources\Json\Resource;
-use App\Enums\DataTypeEnum;
 
 class Setting extends Resource
 {

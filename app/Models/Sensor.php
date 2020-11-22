@@ -8,7 +8,8 @@ class Sensor extends Model
 {
     protected $table = 'sensors';
     protected $fillable = [
-        'name'
+        'name',
+        'key'
     ];
 
     public function delete()

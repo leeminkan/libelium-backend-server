@@ -3,14 +3,14 @@
 namespace App\Resources;
 
 use Illuminate\Http\Resources\Json\Resource;
-use App\Enums\DataTypeEnum;
+use App\Enums\SensorKeyEnum;
 use App\Resources\Sensor;
 
 class Device extends Resource
 {
     public function toArray($request)
     {
-        $battery = $this->data_collections()->where('type', DataTypeEnum::Battery)
+        $battery = $this->data_collections()->where('sensor_key', SensorKeyEnum::Pin)
         ->orderBy('created_at', 'DESC')->first();
 
         return [
