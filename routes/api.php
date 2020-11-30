@@ -56,16 +56,6 @@ Route::Group([
 });
 
 Route::Group([
-    'prefix' => 'transactions',
-    'as' => 'transactions.'
-], function () {
-    
-    Route::Group(['middleware' => 'auth:api'], function() {
-        Route::get('', 'TransactionController@index')->name('get');
-    });
-});
-
-Route::Group([
     'prefix' => 'data-collections',
     'as' => 'data-collections.'
 ], function () {

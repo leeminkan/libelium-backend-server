@@ -20,15 +20,9 @@ class Device extends Model
 
         if ($this->exists && !$isSoftDeleted) {
             $this->sensors()->sync([]);
-            $this->transactions()->delete();
         }
 
         return parent::delete();
-    }
-    
-    public function transactions()
-    {
-        return $this->hasMany(Transaction::class, 'waspmote_id', 'waspmote_id');
     }
     
     public function data_collections()

@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use App\Repositories\Interfaces\DataCollectionRepository;
 use App\Repositories\Interfaces\DeviceRepository;
-use App\Repositories\Interfaces\TransactionRepository;
 use App\Resources\DataCollection as DataCollection;
 
 class DataCollectionController extends BaseController
@@ -22,21 +21,14 @@ class DataCollectionController extends BaseController
     private $device;
 
     /**
-     * @var TransactionRepository
-     */
-    private $transaction;
-
-    /**
      * DataCollectionController constructor.
      * @param DataCollectionRepository $data_collections
      * @param DeviceRepository $device
-     * @param TransactionRepository $transaction
      */
-    public function __construct(DataCollectionRepository $data_collections, DeviceRepository $device, TransactionRepository $transaction)
+    public function __construct(DataCollectionRepository $data_collections, DeviceRepository $device)
     {
         $this->data_collections = $data_collections;
         $this->device = $device;
-        $this->transaction = $transaction;
     }
 
     /**
@@ -74,20 +66,14 @@ class DataCollectionController extends BaseController
             $device = $this->device->findOrFail($id);
             if ($device) {
                 for ($x = 0; $x <= 10; $x++) {
-                    $transaction = $this->transaction->create([
-                        'waspmote_id' => $device->waspmote_id,
-                        'type' => 'nhietdo_luongpin'
-                    ]);
 
                     $this->data_collections->create([
                         'waspmote_id' => $device->waspmote_id,
-                        'transaction_id' => $transaction->id,
                         'type' => 'battery',
                         'value' => rand(10,100)
                     ]);
                     $this->data_collections->create([
                         'waspmote_id' => $device->waspmote_id,
-                        'transaction_id' => $transaction->id,
                         'type' => 'temperature',
                         'value' => rand(10,40)
                     ]);
