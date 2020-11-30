@@ -38,7 +38,7 @@ class DataCollectionRepository extends BaseRepository implements DataCollectionR
         $type = $request->get('type', null);
 
         if ($type) {
-            $query->where('type', $type);
+            $query->where('sensor_key', $type);
         }
 
         $this->filterQuery($query, $request->get('filters', []));
