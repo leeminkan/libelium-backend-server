@@ -7,6 +7,7 @@ use Illuminate\Http\JsonResponse;
 use App\Repositories\Interfaces\DataCollectionRepository;
 use App\Repositories\Interfaces\DeviceRepository;
 use App\Resources\DataCollection as DataCollection;
+use DB;
 
 class DataCollectionController extends BaseController
 {
@@ -60,26 +61,28 @@ class DataCollectionController extends BaseController
         }, $request);
     }
 
-    public function seedForWaspmoteId(Request $request, $id)
+    public function seed(Request $request)
     {
-        return $this->withErrorHandling(function ($request) use($id) {
-            $device = $this->device->findOrFail($id);
-            if ($device) {
-                for ($x = 0; $x <= 10; $x++) {
-
-                    $this->data_collections->create([
-                        'waspmote_id' => $device->waspmote_id,
-                        'type' => 'battery',
-                        'value' => rand(10,100)
-                    ]);
-                    $this->data_collections->create([
-                        'waspmote_id' => $device->waspmote_id,
-                        'type' => 'temperature',
-                        'value' => rand(10,40)
-                    ]);
+        return $this->withErrorHandling(function ($request) {
+            try {
+                DB::beginTransaction();
+                $data = $request->get('data', []);
+                foreach ($data as $arrayValue) {
+                    if (is_string($arrayValue)) {
+                        $newArray = str_replace("'", "\"", $arrayValue);
+                        $arrayValue =  (array) json_decode($newArray);
+                    }
+                    if (is_array($arrayValue)) {
+                        $this->device->findOrFail($arrayValue["waspmote_id"]);
+                        $this->data_collections->create($arrayValue);
+                    }
                 }
+                DB::commit();
+                return $this->responseWithData("Seed Successfully!!");
+            } catch (Exception $e) {
+                DB::rollBack();
+                throw $e;
             }
-            return $this->responseWithData("Seed Successfully!!");
         }, $request);
     }
 }

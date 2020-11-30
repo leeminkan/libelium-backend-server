@@ -63,7 +63,7 @@ Route::Group([
     Route::Group(['middleware' => 'auth:api'], function() {
         Route::get('', 'DataCollectionController@index')->name('get');
         Route::get('get-by-waspmote-id/{id}', 'DataCollectionController@getByWaspmoteId')->name('get-by-waspmote-id');
-        Route::get('seed/{id}', 'DataCollectionController@seedForWaspmoteId')->name('seed-for-waspmote-id');
+        Route::post('seed', 'DataCollectionController@seed')->name('seed');
     });
 });
 
