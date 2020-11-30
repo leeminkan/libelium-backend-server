@@ -82,7 +82,7 @@ class UserController extends BaseController
             $credentials = request(['email', 'password']);
 
             if(!Auth::attempt($credentials)) {
-                return $this->errorResponse(__('validation.unauthorized'), 401);
+                return $this->errorResponse([__('validation.unauthorized')], 401);
             }
 
             $user = $request->user();
