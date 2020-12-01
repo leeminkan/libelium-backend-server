@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use App\Repositories\Interfaces\DeviceRepository;
 use App\Resources\Device as DeviceResource;
+use App\Resources\DisplayedDevice as DisplayedDeviceResource;
 use App\Resources\DataCollection;
 use Illuminate\Support\Facades\Validator;
 use App\Exceptions\ValidationException;
@@ -195,7 +196,7 @@ class DeviceController extends BaseController
     {
         return $this->withErrorHandling(function ($request) {
             $devices = $this->device->allWithBuilder()->where('is_displayed', true)->get();
-            return $this->responseWithData(DeviceResource::collection(
+            return $this->responseWithData(DisplayedDeviceResource::collection(
                 $devices
             ));
         }, $request);
