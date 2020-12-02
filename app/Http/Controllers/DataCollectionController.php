@@ -8,6 +8,9 @@ use App\Repositories\Interfaces\DataCollectionRepository;
 use App\Repositories\Interfaces\DeviceRepository;
 use App\Resources\DataCollection as DataCollection;
 use DB;
+use App\Exports\DataCollectionsExport;
+use Maatwebsite\Excel\Facades\Excel;
+
 
 class DataCollectionController extends BaseController
 {
@@ -83,6 +86,15 @@ class DataCollectionController extends BaseController
                 DB::rollBack();
                 throw $e;
             }
+        }, $request);
+    }
+
+    public function export(Request $request)
+    {
+        return $this->withErrorHandling(function ($request) {
+            $type = $request->get('type', 'csv');
+            $data = $this->data_collections->serverFilteringFor($request);
+            return Excel::download(new DataCollectionsExport($data),'data.'.$type);
         }, $request);
     }
 }
