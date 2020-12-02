@@ -10,7 +10,9 @@ class DataCollection extends Model
     protected $fillable = [
         'waspmote_id',
         'sensor_key',
-        'value'
+        'value',
+        'created_at',
+        'updated_at'
     ];
 
     public $filterRelationAttributes = [

@@ -61,6 +61,7 @@ Route::Group([
 ], function () {
     
     Route::get('export', 'DataCollectionController@export')->name('export');
+    Route::post('import', 'DataCollectionController@import')->name('import');
     Route::Group(['middleware' => 'auth:api'], function() {
         Route::get('', 'DataCollectionController@index')->name('get');
         Route::get('get-by-waspmote-id/{id}', 'DataCollectionController@getByWaspmoteId')->name('get-by-waspmote-id');

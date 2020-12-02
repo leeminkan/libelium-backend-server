@@ -9,6 +9,7 @@ use App\Repositories\Interfaces\DeviceRepository;
 use App\Resources\DataCollection as DataCollection;
 use DB;
 use App\Exports\DataCollectionsExport;
+use App\Imports\DataCollectionsImport;
 use Maatwebsite\Excel\Facades\Excel;
 
 
@@ -98,6 +99,17 @@ class DataCollectionController extends BaseController
             $type = $request->get('type', 'csv');
             $data = $this->data_collections->serverFilteringFor($request);
             return Excel::download(new DataCollectionsExport($data),'data.'.$type);
+        }, $request);
+    }
+
+    public function import(Request $request)
+    {
+        return $this->withErrorHandling(function ($request) {
+            if ($request->has('file')) {
+                $file = $request->file('file');
+                Excel::import(new DataCollectionsImport, $file);
+            }
+            return $this->responseWithData("Import Successfully!!");
         }, $request);
     }
 }
