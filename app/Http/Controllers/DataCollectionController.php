@@ -76,7 +76,10 @@ class DataCollectionController extends BaseController
                         $arrayValue =  (array) json_decode($newArray);
                     }
                     if (is_array($arrayValue)) {
-                        $this->device->findOrFail($arrayValue["waspmote_id"]);
+                        $device = $this->device->allWithBuilder()->where('waspmote_id', $arrayValue["waspmote_id"])->first();
+                        if (!$device) {
+                            return $this->errorResponse([__('validation.device_not_found')], 404);
+                        }
                         $this->data_collections->create($arrayValue);
                     }
                 }

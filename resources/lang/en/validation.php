@@ -186,6 +186,11 @@ return [
 
     # Device - 120x
 
+    'device_not_found' => [
+        'code' => 1200,
+        'message' => 'Device not found.',
+    ],
+
     'type_required' => [
         'code' => 1021,
         'message' => 'The type is required.',
@@ -194,6 +199,11 @@ return [
     'device_image_invalid' => [
         'code' => 1022,
         'message' => 'The image is invalid.',
+    ],
+
+    'device_not_found' => [
+        'code' => 1200,
+        'message' => 'Device not found.',
     ],
 
     # Authentication - 900x
