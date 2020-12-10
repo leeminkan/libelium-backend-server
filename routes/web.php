@@ -12,5 +12,5 @@
 */
 
 Route::get('{all}', function () {
-    return File::get(public_path() . '\dashboard\index.html');
+    return File::get(public_path() . '/dashboard/index.html');
 })->where('all', '^(?!api).*$');
