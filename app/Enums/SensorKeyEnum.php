@@ -17,6 +17,6 @@ use BenSampo\Enum\Enum;
  */
 final class SensorKeyEnum extends Enum
 {
-    const Pin = 'pin';
+    const Battery = 'battery';
     const Temperature = 'temperature';
 }
