@@ -64,8 +64,10 @@ Route::Group([
     Route::post('import', 'DataCollectionController@import')->name('import');
     Route::Group(['middleware' => 'auth:api'], function() {
         Route::get('', 'DataCollectionController@index')->name('get');
+        Route::get('/delete', 'DataCollectionController@delete')->name('delete');
         Route::get('get-by-waspmote-id/{id}', 'DataCollectionController@getByWaspmoteId')->name('get-by-waspmote-id');
         Route::post('seed', 'DataCollectionController@seed')->name('seed');
+        Route::delete('{id}', 'DataCollectionController@destroy')->name('destroy');
     });
 });
 
