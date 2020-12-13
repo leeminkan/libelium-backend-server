@@ -112,4 +112,21 @@ class DataCollectionController extends BaseController
             return $this->responseWithData("Import Successfully!!");
         }, $request);
     }
+
+    public function destroy(Request $request, $id)
+    {
+        return $this->withErrorHandling(function ($request) use ($id) {
+            $data = $this->data_collections->findOrFail($id);
+            $this->data_collections->destroy($data);
+            return $this->messageResponse("Successfully!");
+        }, $request);
+    }
+
+    public function delete(Request $request)
+    {
+        return $this->withErrorHandling(function ($request) {
+            $this->data_collections->advancedDelete($request);
+            return $this->responseWithData("Successfully!!");
+        }, $request);
+    }
 }

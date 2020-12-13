@@ -179,6 +179,19 @@ abstract class BaseRepository implements BaseRepositoryInterface
     }
 
     /**
+     * @inheritDoc
+     */
+    public function advancedDelete(Request $request)
+    {
+        $query = $this->allWithBuilder();
+        
+        $this->filterQuery($query, $request->get('filters', []));
+        $this->searchQuery($query, $request->get('search', null));
+
+        return $query->delete();
+    }
+
+    /**
      * @return array
      */
     public function searchFields(): array

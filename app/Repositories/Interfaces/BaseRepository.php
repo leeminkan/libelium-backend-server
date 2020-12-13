@@ -67,4 +67,10 @@ interface BaseRepository
      * @return mixed
      */
     public function serverFilteringFor(Request $request);
+
+    /**
+     * @param Request $request
+     * @return mixed
+     */
+    public function advancedDelete(Request $request);
 }
