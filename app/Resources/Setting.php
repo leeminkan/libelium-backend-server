@@ -12,7 +12,8 @@ class Setting extends Resource
         return [
             'window_size' => $this->window_size,
             'saving_level' => $this->saving_level,
-            'time_base' => $this->time_base
+            'time_base' => $this->time_base,
+            'comparition_page' => $this->comparition_page
         ];
     }
 }

@@ -39,6 +39,17 @@ class SettingController extends BaseController
         }, $request);
     }
 
+
+    public function getComparisionPage(Request $request)
+    {
+        return $this->withErrorHandling(function ($request) {
+
+            $data = $this->setting->allWithBuilder()->first();
+            
+            return $this->responseWithData($data->comparition_page);
+        }, $request);
+    }
+
     /**
      * Response list of setting
      * @param Request $request

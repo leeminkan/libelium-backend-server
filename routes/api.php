@@ -93,6 +93,7 @@ Route::Group([
     
     Route::Group(['middleware' => 'auth:api'], function() {
         Route::get('', 'SettingController@index')->name('get');
+        Route::get('/comparision-page', 'SettingController@getComparisionPage')->name('getComparisionPage');
         Route::put('', 'SettingController@update')->name('update');
     });
 });
