@@ -19,10 +19,16 @@ class Device extends Model
         $isSoftDeleted = array_key_exists('Illuminate\Database\Eloquent\SoftDeletes', class_uses($this));
 
         if ($this->exists && !$isSoftDeleted) {
+            $this->algorithm_parameters()->delete();
             $this->sensors()->sync([]);
         }
 
         return parent::delete();
+    }
+    
+    public function algorithm_parameters()
+    {
+        return $this->hasMany(AlgorithmParameter::class, 'waspmote_id', 'waspmote_id');
     }
     
     public function data_collections()

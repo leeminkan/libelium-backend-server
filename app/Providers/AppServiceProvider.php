@@ -13,6 +13,7 @@ class AppServiceProvider extends ServiceProvider
         "App\Repositories\Interfaces\UserRepository" => "App\Repositories\UserRepository",
         "App\Repositories\Interfaces\DeviceRepository" => "App\Repositories\DeviceRepository",
         "App\Repositories\Interfaces\DataCollectionRepository" => "App\Repositories\DataCollectionRepository",
+        "App\Repositories\Interfaces\AlgorithmParameterRepository" => "App\Repositories\AlgorithmParameterRepository",
         "App\Repositories\Interfaces\SettingRepository" => "App\Repositories\SettingRepository",
         "App\Repositories\Interfaces\SensorRepository" => "App\Repositories\SensorRepository",
     ];
