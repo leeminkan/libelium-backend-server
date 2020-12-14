@@ -13,6 +13,7 @@ use Illuminate\Contracts\Container\BindingResolutionException;
 use App\Repositories\Interfaces\BaseRepository as BaseRepositoryInterface;
 use App\Traits\FilterSearchQuery;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 abstract class BaseRepository implements BaseRepositoryInterface
 {
@@ -161,7 +162,15 @@ abstract class BaseRepository implements BaseRepositoryInterface
         if (is_null($request->get('pagination')) || $request->get('pagination')) {
             return $query->paginate((int)$request->get('per_page', 10));
         }
-        return $query->get();
+        
+        $result = $query->get();
+        $count = $result->count();
+
+        if ($count == 0) {
+            $count++;
+        }
+
+        return new LengthAwarePaginator($result, $count, $count);
     }
 
     /**

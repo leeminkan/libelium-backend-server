@@ -11,6 +11,11 @@ class Setting extends Model
     protected $fillable = [
         'window_size',
         'saving_level',
-        'time_base'
+        'time_base',
+        'comparition_page'
+    ];
+
+    protected $casts = [
+        'comparition_page' => 'object',
     ];
 }

@@ -5,6 +5,7 @@
 /public/dashboard
 /public/uploads
 /storage/api-docs
+/storage/framework
 /storage/*.key
 /vendor
 /subscriber

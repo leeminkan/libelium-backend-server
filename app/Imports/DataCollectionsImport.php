@@ -15,13 +15,21 @@ class DataCollectionsImport implements ToModel
      */
     public function model(array $row)
     {
-        error_log(Carbon::parse($row[4]));
         return new DataCollection([
            'waspmote_id'    => $row[1],
            'sensor_key' => $row[2],
            'value' => $row[3],
-           'created_at' => \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row[4]),
-           'updated_at' => \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row[5]),
+           'created_at' => $this->transformDateTime($row[4]),
+           'updated_at' => $this->transformDateTime($row[5]),
         ]);
+    }
+
+    private function transformDateTime(string $value, string $format = 'Y-m-d H:i:s')
+    {
+        try {
+                return Carbon::instance(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($value))->format($format);
+            } catch (\ErrorException $e) {
+                return Carbon::parse($value)->format($format);
+            }
     }
 }

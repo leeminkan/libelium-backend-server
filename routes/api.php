@@ -56,6 +56,21 @@ Route::Group([
 });
 
 Route::Group([
+    'prefix' => 'algorithm-parameters',
+    'as' => 'algorithm-parameters.'
+], function () {
+    
+    Route::Group(['middleware' => 'auth:api'], function() {
+        Route::get('', 'AlgorithmParameterController@index')->name('get');
+        Route::get('/get-one', 'AlgorithmParameterController@getOne')->name('getOne');
+        Route::post('', 'AlgorithmParameterController@store')->name('store');
+        Route::get('{id}', 'AlgorithmParameterController@find')->name('find');
+        Route::put('{id}', 'AlgorithmParameterController@update')->name('update');
+        Route::delete('{id}', 'AlgorithmParameterController@destroy')->name('destroy');
+    });
+});
+
+Route::Group([
     'prefix' => 'data-collections',
     'as' => 'data-collections.'
 ], function () {
@@ -78,6 +93,7 @@ Route::Group([
     
     Route::Group(['middleware' => 'auth:api'], function() {
         Route::get('', 'SettingController@index')->name('get');
+        Route::get('/comparision-page', 'SettingController@getComparisionPage')->name('getComparisionPage');
         Route::put('', 'SettingController@update')->name('update');
     });
 });

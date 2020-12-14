@@ -10,7 +10,7 @@ class DisplayedDevice extends Resource
 {
     public function toArray($request)
     {
-        $battery = $this->data_collections()->where('sensor_key', SensorKeyEnum::Pin)
+        $battery = $this->data_collections()->where('sensor_key', SensorKeyEnum::Battery)
         ->orderBy('created_at', 'DESC')->first();
 
         return [
