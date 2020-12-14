@@ -4,7 +4,7 @@ namespace App\Repositories;
 
 use App\Repositories\Interfaces\AlgorithmParameterRepository as AlgorithmParameterRepositoryInterface;
 use App\Models\AlgorithmParameter;
-use Illuminate\Http\Request;
+use DB;
 
 class AlgorithmParameterRepository extends BaseRepository implements AlgorithmParameterRepositoryInterface
 {
@@ -29,5 +29,19 @@ class AlgorithmParameterRepository extends BaseRepository implements AlgorithmPa
             'created_at',
             'updated_at'
         ];
+    }
+    
+    public function getAll() {
+        $query = $this->allWithBuilder()
+        ->join(
+            DB::raw('(SELECT waspmote_id, MAX(created_at) created_at FROM algorithm_parameters GROUP BY waspmote_id) AS filter_table')
+            , function($join)
+            {
+                $join->on('algorithm_parameters.waspmote_id', '=', 'filter_table.waspmote_id');
+                $join->on('algorithm_parameters.created_at', '=', 'filter_table.created_at');
+            }
+        );
+
+        return $query->get();
     }
 }

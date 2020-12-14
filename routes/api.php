@@ -63,6 +63,7 @@ Route::Group([
     Route::Group(['middleware' => 'auth:api'], function() {
         Route::get('', 'AlgorithmParameterController@index')->name('get');
         Route::get('/get-one', 'AlgorithmParameterController@getOne')->name('getOne');
+        Route::get('/get-all', 'AlgorithmParameterController@getAll')->name('getAll');
         Route::post('', 'AlgorithmParameterController@store')->name('store');
         Route::get('{id}', 'AlgorithmParameterController@find')->name('find');
         Route::put('{id}', 'AlgorithmParameterController@update')->name('update');

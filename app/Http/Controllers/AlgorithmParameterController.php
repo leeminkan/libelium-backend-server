@@ -70,6 +70,18 @@ class AlgorithmParameterController extends BaseController
         });
     }
 
+    public function getAll(Request $request)
+    {
+        return $this->withErrorHandling(function ($request) {
+            return AlgorithmParameter::collection(
+                $this->algorithmParameter->getAll()
+            )->additional([
+                'error' => false,
+                'errors' => null
+            ]);
+        });
+    }
+
     public function find($id)
     {
         return $this->withErrorHandling(function () use ($id) {
