@@ -65,7 +65,6 @@ class AlgorithmParameterController extends BaseController
         return $this->withErrorHandling(function ($request) {
             $data = $this->algorithmParameter->allWithBuilder()
             ->where('waspmote_id', $request->get('waspmote_id', null))
-            ->where('sensor_key', $request->get('sensor_key', null))
             ->first();
             return $this->responseWithData(new AlgorithmParameter($data));
         });
