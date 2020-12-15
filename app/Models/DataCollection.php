@@ -11,6 +11,7 @@ class DataCollection extends Model
         'waspmote_id',
         'sensor_key',
         'value',
+        'for_algorithm',
         'created_at',
         'updated_at'
     ];
