@@ -55,6 +55,15 @@ class UserController extends BaseController
             return $this->responseWithData(UserResource::collection($data));
         }, $request);
     }
+
+    public function destroy(Request $request, $id)
+    {
+        return $this->withErrorHandling(function ($request) use ($id) {
+            $user = $this->user->findOrFail($id);
+            $this->user->destroy($user);
+            return $this->messageResponse("Successfully!");
+        }, $request);
+    }
     
     public function login(Request $request)
     {

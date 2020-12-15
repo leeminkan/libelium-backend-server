@@ -22,6 +22,7 @@ Route::Group([
     
     Route::Group(['middleware' => 'auth:api'], function() {
         Route::post('', 'UserController@index')->name('get');
+        Route::delete('{id}', 'DeviceController@destroy')->name('destroy');
     });
 });
 
