@@ -35,21 +35,6 @@ class UserController extends BaseController
     public function index(Request $request)
     {
         return $this->withErrorHandling(function ($request) {
-            
-            $rules = [
-                'name' => 'required'
-            ];
-
-            $messages = [
-                'name.required' => 'name_required',
-            ];
-
-            $validator = Validator::make($request->all(), $rules, $messages);
-
-            if ($validator->fails()) {
-                throw (new ValidationException)->setValidator($validator);
-            }
-
             $data = $this->user->all();
             
             return $this->responseWithData(UserResource::collection($data));
