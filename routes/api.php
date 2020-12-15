@@ -76,6 +76,7 @@ Route::Group([
     'as' => 'data-collections.'
 ], function () {
     
+    Route::get('for-gateway', 'DataCollectionController@index')->name('get');
     Route::get('export', 'DataCollectionController@export')->name('export');
     Route::post('import', 'DataCollectionController@import')->name('import');
     Route::Group(['middleware' => 'auth:api'], function() {
