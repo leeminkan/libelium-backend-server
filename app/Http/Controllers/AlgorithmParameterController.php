@@ -65,6 +65,7 @@ class AlgorithmParameterController extends BaseController
         return $this->withErrorHandling(function ($request) {
             $data = $this->algorithmParameter->allWithBuilder()
             ->where('waspmote_id', $request->get('waspmote_id', null))
+            ->orderBy('created_at', 'DESC')
             ->first();
             return $this->responseWithData(new AlgorithmParameter($data));
         });
