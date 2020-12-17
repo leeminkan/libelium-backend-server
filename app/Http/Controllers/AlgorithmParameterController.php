@@ -57,7 +57,10 @@ class AlgorithmParameterController extends BaseController
 
             $data = $this->algorithmParameter->create($request->all());
             
-            event(new MqttPushlisher('notification', 'test'));
+            event(new MqttPushlisher('notification', json_encode([
+                "type" => "update-algorithm-parameter",
+                "value" => $data
+            ])));
 
             return $this->responseWithData(new AlgorithmParameter($data));
         }, $request);
