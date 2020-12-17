@@ -7,6 +7,7 @@ use Illuminate\Http\JsonResponse;
 use App\Repositories\Interfaces\AlgorithmParameterRepository;
 use App\Repositories\Interfaces\DeviceRepository;
 use App\Resources\AlgorithmParameter as AlgorithmParameter;
+use App\Events\MqttPushlisher;
 
 
 class AlgorithmParameterController extends BaseController
@@ -56,6 +57,8 @@ class AlgorithmParameterController extends BaseController
 
             $data = $this->algorithmParameter->create($request->all());
             
+            event(new MqttPushlisher('notification', 'test'));
+
             return $this->responseWithData(new AlgorithmParameter($data));
         }, $request);
     }
