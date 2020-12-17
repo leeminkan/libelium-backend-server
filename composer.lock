@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "75166f4885d90fb03ed88d2560f3a33a",
+    "content-hash": "5071f4c97a1719f9902b49bc9df16b85",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -3448,6 +3448,94 @@
                 "uuid"
             ],
             "time": "2020-02-21T04:36:14+00:00"
+        },
+        {
+            "name": "salmanzafar/laravel-mqtt",
+            "version": "v2.0.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/salmanzafar949/MQTT-Laravel.git",
+                "reference": "17b8830e6987701bd3c6050cbb4f52de111d5728"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/salmanzafar949/MQTT-Laravel/zipball/17b8830e6987701bd3c6050cbb4f52de111d5728",
+                "reference": "17b8830e6987701bd3c6050cbb4f52de111d5728",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.0 || ^7.1 || ^7.2 || ^7.3 || ^7.4 || ^8.0"
+            },
+            "require-dev": {
+                "laravel/framework": "^5.5 || ^6.0 || ^7.0 || ^8.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Salman\\Mqtt\\MqttServiceProvider"
+                    ],
+                    "aliases": {
+                        "Mqtt": "Salman\\Mqtt\\Facades\\Mqtt"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Salman\\Mqtt\\": "src/"
+                },
+                "files": [
+                    "src/Helper/Helpers.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Salman Zafar",
+                    "email": "salmanzafar949@gmail.com"
+                }
+            ],
+            "description": "A simple Laravel Library to connect/publish/subscribe to MQTT broker",
+            "keywords": [
+                "PHP 5.4",
+                "laravel",
+                "laravel mqtt",
+                "laravel mqtt library",
+                "laravel-5",
+                "laravel-6",
+                "laravel-7",
+                "laravel-8",
+                "laravel-mqtt",
+                "laravel5",
+                "laravel6",
+                "laravel7",
+                "laravel8",
+                "mqtt laravel",
+                "mqtt-laravel",
+                "mqtt-laravel-publisher",
+                "mqtt-laravel-subscriber",
+                "php",
+                "php 7.0",
+                "php 7.1",
+                "php 7.2",
+                "php 7.3",
+                "php 7.4",
+                "php 8"
+            ],
+            "funding": [
+                {
+                    "url": "https://www.buymeacoffee.com/salmanzafar949",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://www.patreon.com/salmanzafar949",
+                    "type": "patreon"
+                }
+            ],
+            "time": "2020-12-16T08:53:15+00:00"
         },
         {
             "name": "swagger-api/swagger-ui",
