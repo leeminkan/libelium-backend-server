@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddForAlgorithmToDataCollectionsTable extends Migration
+class AddTimeGetSampleToDataCollectionsTalbe extends Migration
 {
     /**
      * Run the migrations.
@@ -15,7 +15,7 @@ class AddForAlgorithmToDataCollectionsTable extends Migration
     {
         Schema::table('data_collections', function (Blueprint $table) {
             //
-            $table->boolean('for_algorithm')->after('value')->default(0);
+            $table->string('time_get_sample')->after('for_algorithm')->default(0);
         });
     }
 
@@ -28,7 +28,7 @@ class AddForAlgorithmToDataCollectionsTable extends Migration
     {
         Schema::table('data_collections', function (Blueprint $table) {
             //
-            $table->dropColumn('for_algorithm');
+            $table->dropColumn('time_get_sample');
         });
     }
 }

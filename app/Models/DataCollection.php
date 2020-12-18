@@ -12,8 +12,13 @@ class DataCollection extends Model
         'sensor_key',
         'value',
         'for_algorithm',
+        'time_get_sample',
         'created_at',
         'updated_at'
+    ];
+
+    protected $casts = [
+        'time_get_sample' => 'float',
     ];
 
     public $filterRelationAttributes = [

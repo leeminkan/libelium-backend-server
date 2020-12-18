@@ -14,6 +14,8 @@ class DataCollection extends Resource
             'device_name' => $this->device ? $this->device->name : null,
             'sensor_name' => $this->sensor ? $this->sensor->name : null,
             'value' => $this->value,
+            'for_algorithm' => $this->for_algorithm,
+            'time_get_sample' => $this->time_get_sample,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];
