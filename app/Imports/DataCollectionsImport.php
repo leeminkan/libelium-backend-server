@@ -22,6 +22,7 @@ class DataCollectionsImport implements ToModel
            'created_at' => $this->transformDateTime($row[4]),
            'updated_at' => $this->transformDateTime($row[5]),
            'for_algorithm' => isset($row[6]) ? true : false,
+           'time_get_sample' => isset($row[7]) ? $row[7] : 0,
         ]);
     }
 
