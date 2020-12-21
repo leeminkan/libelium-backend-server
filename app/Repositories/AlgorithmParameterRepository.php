@@ -34,7 +34,7 @@ class AlgorithmParameterRepository extends BaseRepository implements AlgorithmPa
     public function getAll() {
         $query = $this->allWithBuilder()
         ->join(
-            DB::raw('(SELECT waspmote_id, MAX(created_at) created_at FROM algorithm_parameters GROUP BY waspmote_id) AS filter_table')
+            DB::raw('(SELECT waspmote_id, MAX(created_at) created_at FROM algorithm_parameters WHERE is_selected = 1 GROUP BY waspmote_id) AS filter_table')
             , function($join)
             {
                 $join->on('algorithm_parameters.waspmote_id', '=', 'filter_table.waspmote_id');

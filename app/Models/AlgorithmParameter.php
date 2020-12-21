@@ -9,6 +9,7 @@ class AlgorithmParameter extends Model
     protected $table = 'algorithm_parameters';
     protected $fillable = [
         'waspmote_id',
+        'is_selected',
         'is_disabled',
         'window_size',
         'saving_level',

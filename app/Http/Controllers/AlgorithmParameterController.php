@@ -8,6 +8,8 @@ use App\Repositories\Interfaces\AlgorithmParameterRepository;
 use App\Repositories\Interfaces\DeviceRepository;
 use App\Resources\AlgorithmParameter as AlgorithmParameter;
 use App\Events\MqttPushlisher;
+use Illuminate\Support\Facades\Validator;
+use App\Exceptions\ValidationException;
 
 
 class AlgorithmParameterController extends BaseController
@@ -55,7 +57,52 @@ class AlgorithmParameterController extends BaseController
     {
         return $this->withErrorHandling(function ($request) {
 
-            $data = $this->algorithmParameter->create($request->all());
+            $rules = [
+                'waspmote_id' => 'required',
+                'window_size' => 'required',
+                'saving_level' => 'required',
+                'time_base' => 'required',
+            ];
+
+            $messages = [
+                'waspmote_id.required' => 'device_image_invalid',
+                'window_size.required' => 'device_image_invalid',
+                'saving_level.required' => 'device_image_invalid',
+                'time_base.required' => 'device_image_invalid',
+            ];
+
+            $validator = Validator::make($request->all(), $rules, $messages);
+
+            if ($validator->fails()) {
+                throw (new ValidationException)->setValidator($validator);
+            }
+
+            // disable hết
+            $this->algorithmParameter->allWithBuilder()
+            ->where('waspmote_id', $request->get('waspmote_id', null))
+            ->update([
+                'is_selected' => 0
+            ]);
+
+            // kiểm tra xem có cái nào tồn tại chưa ?
+            $data = $this->algorithmParameter->allWithBuilder()
+            ->where('waspmote_id', $request->get('waspmote_id', null))
+            ->where('window_size', $request->get('window_size', null))
+            ->where('saving_level', $request->get('saving_level', null))
+            ->where('time_base', $request->get('time_base', null))
+            ->first();
+
+            // nếu có thì enable lại
+            if ($data) {
+                $this->algorithmParameter->update($data, [
+                    'is_selected' => 1
+                ]);
+            } else {
+                // chưa thì tạo mới với enable
+                $data = $this->algorithmParameter->create(array_merge($request->all(), [
+                    'is_selected' => 1
+                ]));
+            }
             
             event(new MqttPushlisher('notification', json_encode([
                 "type" => "update-algorithm-parameter",
@@ -71,6 +118,7 @@ class AlgorithmParameterController extends BaseController
         return $this->withErrorHandling(function ($request) {
             $data = $this->algorithmParameter->allWithBuilder()
             ->where('waspmote_id', $request->get('waspmote_id', null))
+            ->where('is_selected', '1')
             ->orderBy('created_at', 'DESC')
             ->first();
             return $this->responseWithData(new AlgorithmParameter($data));
@@ -112,6 +160,14 @@ class AlgorithmParameterController extends BaseController
             $data = $this->algorithmParameter->findOrFail($id);
             $this->algorithmParameter->destroy($data);
             return $this->messageResponse("Successfully!");
+        }, $request);
+    }
+
+    public function delete(Request $request)
+    {
+        return $this->withErrorHandling(function ($request) {
+            $this->algorithmParameter->advancedDelete($request);
+            return $this->responseWithData("Successfully!!");
         }, $request);
     }
 }
