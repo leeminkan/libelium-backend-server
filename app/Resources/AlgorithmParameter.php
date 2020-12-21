@@ -11,6 +11,7 @@ class AlgorithmParameter extends Resource
         return [
             'id' => $this->id,
             'waspmote_id' => $this->waspmote_id,
+            'is_selected' => $this->is_selected,
             'is_disabled' => $this->is_disabled,
             'window_size' => $this->window_size,
             'saving_level' => $this->saving_level,

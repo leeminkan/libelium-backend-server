@@ -63,6 +63,7 @@ Route::Group([
     
     Route::Group(['middleware' => 'auth:api'], function() {
         Route::get('', 'AlgorithmParameterController@index')->name('get');
+        Route::get('/delete', 'AlgorithmParameterController@delete')->name('delete');
         Route::get('/get-one', 'AlgorithmParameterController@getOne')->name('getOne');
         Route::get('/get-all', 'AlgorithmParameterController@getAll')->name('getAll');
         Route::post('', 'AlgorithmParameterController@store')->name('store');
