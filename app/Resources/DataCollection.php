@@ -16,6 +16,7 @@ class DataCollection extends Resource
             'value' => $this->value,
             'for_algorithm' => $this->for_algorithm,
             'time_get_sample' => $this->time_get_sample,
+            'algorithm_parameter_id' => $this->algorithm_parameter_id,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];
