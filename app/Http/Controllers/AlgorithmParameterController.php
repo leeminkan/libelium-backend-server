@@ -94,9 +94,9 @@ class AlgorithmParameterController extends BaseController
 
             // nếu có thì enable lại
             if ($data) {
-                $this->algorithmParameter->update($data, [
+                $this->algorithmParameter->update($data, array_merge($request->all(), [
                     'is_selected' => 1
-                ]);
+                ]));
             } else {
                 // chưa thì tạo mới với enable
                 $data = $this->algorithmParameter->create(array_merge($request->all(), [
