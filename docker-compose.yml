@@ -70,6 +70,17 @@ services:
     networks:
       - app-network
 
+  #Cron Service
+  cron:
+    build:
+      context: .
+      dockerfile: cron.dockerfile
+    container_name: cron
+    volumes:
+      - ./:/var/www
+    networks:
+      - app-network
+
 #Docker Networks
 networks:
   app-network:
