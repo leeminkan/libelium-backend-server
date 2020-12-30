@@ -19,9 +19,11 @@ class Device extends Resource
             'name' => $this->name,
             'image' => $this->image,
             'is_displayed' => $this->is_displayed,
+            'active' => $this->active,
             'battery' => $battery ? $battery->value : null,
             'sensors' => Sensor::collection($this->sensors()->get()),
             'description' => $this->description,
+            'algorithm_param_description' => $this->algorithm_param_description,
             'created_at' => $this->created_at
         ];
     }

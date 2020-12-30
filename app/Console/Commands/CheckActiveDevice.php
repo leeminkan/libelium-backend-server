@@ -3,6 +3,8 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use App\Repositories\Interfaces\DeviceRepository;
+use Carbon\Carbon;
 
 class CheckActiveDevice extends Command
 {
@@ -21,13 +23,19 @@ class CheckActiveDevice extends Command
     protected $description = 'Check active device';
 
     /**
+     * @var DeviceRepository
+     */
+    private $device;
+
+    /**
      * Create a new command instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(DeviceRepository $device)
     {
         parent::__construct();
+        $this->device = $device;
     }
 
     /**
@@ -38,6 +46,35 @@ class CheckActiveDevice extends Command
     public function handle()
     {
         //
-        $this->info('Check active device');
+        try {
+            $devices = $this->device->allWithBuilder()->get();
+            $checkTime = Carbon::now();
+
+            foreach ($devices as $device) {
+                $data = $device->data_collections()->orderBy('created_at', 'desc')->first();
+                if ($data) {
+                    try {
+                        $compareTime = Carbon::parse($data->created_at)->addHours();
+                        if ($compareTime->lt($checkTime)) {
+                            if ($device->active) {
+                                $this->device->update($device, [
+                                    "active" => false
+                                ]);
+                            }
+                        } else {
+                            if (!$device->active) {
+                                $this->device->update($device, [
+                                    "active" => true
+                                ]);
+                            }
+                        }
+                    } catch (\Exception $e) {
+                        \Log::info($e->getMessage());
+                    }
+                }
+            }
+        } catch (\Exception $e) {
+            \Log::info($e->getMessage());
+        }
     }
 }
