@@ -11,6 +11,7 @@ class Device extends Model
         'waspmote_id',
         'name',
         'image',
+        'active',
         'description',
         'algorithm_param_description',
         'is_displayed'
