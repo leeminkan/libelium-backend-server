@@ -22,6 +22,7 @@ class DisplayedDevice extends Resource
             'battery' => $battery ? $battery->value : null,
             'sensors' => Sensor::collection($this->sensors()->get()),
             'count_sensors' => $this->sensors()->count(),
+            'description' => $this->description,
             'created_at' => $this->created_at
         ];
     }
