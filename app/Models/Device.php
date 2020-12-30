@@ -12,6 +12,7 @@ class Device extends Model
         'name',
         'image',
         'description',
+        'algorithm_param_description',
         'is_displayed'
     ];
 

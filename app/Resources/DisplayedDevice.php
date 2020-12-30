@@ -23,6 +23,7 @@ class DisplayedDevice extends Resource
             'sensors' => Sensor::collection($this->sensors()->get()),
             'count_sensors' => $this->sensors()->count(),
             'description' => $this->description,
+            'algorithm_param_description' => $this->algorithm_param_description,
             'created_at' => $this->created_at
         ];
     }

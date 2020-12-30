@@ -22,6 +22,7 @@ class Device extends Resource
             'battery' => $battery ? $battery->value : null,
             'sensors' => Sensor::collection($this->sensors()->get()),
             'description' => $this->description,
+            'algorithm_param_description' => $this->algorithm_param_description,
             'created_at' => $this->created_at
         ];
     }
