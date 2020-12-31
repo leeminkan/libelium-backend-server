@@ -80,6 +80,22 @@ services:
       - ./:/var/www
     networks:
       - app-network
+        
+  # Mqtt Broker
+  broker:
+    image: eclipse-mosquitto
+    hostname: broker
+    container_name: broker
+    expose:
+      - "1883"
+      - "9001"
+    ports:
+      - "1883:1883"
+      - "9001:9001"
+    volumes:
+      - ./mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf
+    networks:
+      - app-network
 
 #Docker Networks
 networks:
