@@ -12,6 +12,11 @@ class Sensor extends Model
         'key',
         'unit',
         'description',
+        'chart_options',
+    ];
+
+    protected $casts = [
+        'chart_options' => 'object',
     ];
 
     public function delete()

@@ -14,6 +14,7 @@ class Sensor extends Resource
             'key' => $this->key,
             'unit' => $this->unit,
             'description' => $this->description,
+            'chart_options' => $this->chart_options,
             'created_at' => $this->created_at
         ];
     }
