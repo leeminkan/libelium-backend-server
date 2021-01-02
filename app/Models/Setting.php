@@ -12,10 +12,12 @@ class Setting extends Model
         'window_size',
         'saving_level',
         'time_base',
-        'comparition_page'
+        'comparition_page',
+        'algorithm_param_page'
     ];
 
     protected $casts = [
         'comparition_page' => 'object',
+        'algorithm_param_page' => 'object',
     ];
 }

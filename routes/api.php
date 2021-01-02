@@ -98,6 +98,23 @@ Route::Group([
     Route::Group(['middleware' => 'auth:api'], function() {
         Route::get('', 'SettingController@index')->name('get');
         Route::get('/comparision-page', 'SettingController@getComparisionPage')->name('getComparisionPage');
+        Route::get('/algorithm-param-page', 'SettingController@getAlgorithmParamPage')->name('getAlgorithmParamPage');
         Route::put('', 'SettingController@update')->name('update');
+    });
+});
+
+
+Route::Group([
+    'prefix' => 'error-rates',
+    'as' => 'error-rates.'
+], function () {
+    
+    Route::Group(['middleware' => 'auth:api'], function() {
+        Route::get('', 'ErrorRateController@index')->name('get');
+        Route::post('', 'ErrorRateController@store')->name('store');
+        Route::get('{id}', 'ErrorRateController@find')->name('find');
+        Route::put('{id}', 'ErrorRateController@update')->name('update');
+        Route::delete('{id}', 'ErrorRateController@destroy')->name('destroy');
+        Route::get('/delete', 'ErrorRateController@delete')->name('delete');
     });
 });
