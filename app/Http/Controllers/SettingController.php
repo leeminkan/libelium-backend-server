@@ -50,6 +50,17 @@ class SettingController extends BaseController
         }, $request);
     }
 
+
+    public function getAlgorithmParamPage(Request $request)
+    {
+        return $this->withErrorHandling(function ($request) {
+
+            $data = $this->setting->allWithBuilder()->first();
+            
+            return $this->responseWithData($data->algorithm_param_page);
+        }, $request);
+    }
+
     /**
      * Response list of setting
      * @param Request $request
