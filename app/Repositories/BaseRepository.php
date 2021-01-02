@@ -14,6 +14,7 @@ use App\Repositories\Interfaces\BaseRepository as BaseRepositoryInterface;
 use App\Traits\FilterSearchQuery;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Arr;
 
 abstract class BaseRepository implements BaseRepositoryInterface
 {
@@ -198,6 +199,21 @@ abstract class BaseRepository implements BaseRepositoryInterface
         $this->searchQuery($query, $request->get('search', null));
 
         return $query->delete();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function advancedUpdate(Request $request, $payload)
+    {
+        $input = Arr::except($payload, ['filters', 'search']);
+        
+        $query = $this->allWithBuilder();
+        
+        $this->filterQuery($query, $request->get('filters', []));
+        $this->searchQuery($query, $request->get('search', null));
+
+        return $query->update($input);
     }
 
     /**

@@ -83,6 +83,7 @@ Route::Group([
     Route::Group(['middleware' => 'auth:api'], function() {
         Route::get('', 'DataCollectionController@index')->name('get');
         Route::get('/delete', 'DataCollectionController@delete')->name('delete');
+        Route::post('/advanced-update', 'DataCollectionController@advancedUpdate')->name('advanced-update');
         Route::get('get-by-waspmote-id/{id}', 'DataCollectionController@getByWaspmoteId')->name('get-by-waspmote-id');
         Route::post('seed', 'DataCollectionController@seed')->name('seed');
         Route::delete('{id}', 'DataCollectionController@destroy')->name('destroy');

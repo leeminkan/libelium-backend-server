@@ -129,4 +129,14 @@ class DataCollectionController extends BaseController
             return $this->responseWithData("Successfully!!");
         }, $request);
     }
+
+    public function advancedUpdate(Request $request)
+    {
+        return $this->withErrorHandling(function ($request) {
+            $input = $request->all();
+
+            $this->data_collections->advancedUpdate($request, $input);
+            return $this->responseWithData("Successfully!!");
+        }, $request);
+    }
 }
