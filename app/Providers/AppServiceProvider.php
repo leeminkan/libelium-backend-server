@@ -16,6 +16,7 @@ class AppServiceProvider extends ServiceProvider
         "App\Repositories\Interfaces\AlgorithmParameterRepository" => "App\Repositories\AlgorithmParameterRepository",
         "App\Repositories\Interfaces\SettingRepository" => "App\Repositories\SettingRepository",
         "App\Repositories\Interfaces\SensorRepository" => "App\Repositories\SensorRepository",
+        "App\Repositories\Interfaces\ErrorRateRepository" => "App\Repositories\ErrorRateRepository",
     ];
     /**
      * Register any application services.
